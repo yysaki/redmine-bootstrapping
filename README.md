@@ -29,12 +29,13 @@ sudo apt-get install -y libmagickwand-dev imagemagick
 sudo gem install passenger
 sudo passenger-install-nginx-module --auto
 git clone https://github.com/redmine/redmine.git
+cp /vagrant/files/database.yml /home/vagrant/redmine/config/
 sudo gem install bundler
 bundle install --without development test
 bundle exec rake generate_secret_token
 sudo RAILS_ENV=production bundle exec rake db:migrate
 sudo RAILS_ENV=production bundle exec rake redmine:load_default_data
-sudo vi /opt/nginx/conf/nginx.conf
+sudo cp /vagrant/files/nginx.conf /opt/nginx/conf/
 ```
 
 nginx起動
