@@ -25,7 +25,10 @@ sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y git
 sudo apt-get install -y sqlite libsqlite3-dev
+echo 'mysql-server mysql-server/root_password password root' | sudo debconf-set-selections
+echo 'mysql-server mysql-server/root_password_again password root' | sudo debconf-set-selections
 sudo apt-get install -y mysql-server libmysqld-dev
+mysqladmin -p'root' password '' -u root
 sudo apt-get install -y build-essential libssl-dev libreadline6-dev zlib1g-dev libcurl4-openssl-dev curl libyaml-dev ruby ruby-dev
 sudo apt-get install -y libmagickwand-dev imagemagick
 sudo gem install passenger
