@@ -20,8 +20,9 @@ vagrant ssh
 ==========
 
 ``` sh
+cd /home/vagrant/
 sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get upgrade -y
 sudo apt-get install -y git
 sudo apt-get install -y sqlite libsqlite3-dev
 sudo apt-get install -y mysql-server libmysqld-dev
