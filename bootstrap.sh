@@ -19,7 +19,7 @@ git clone https://github.com/redmine/redmine.git
 cd /home/vagrant/redmine/
 git checkout 3.1.1
 cp /vagrant/files/database.yml /home/vagrant/redmine/config/
-bundle install --without development test
+bundle install --path .bundle --without development test
 bundle exec rake generate_secret_token
 sudo RAILS_ENV=production bundle exec rake db:migrate
 sudo RAILS_ENV=production bundle exec rake redmine:load_default_data
