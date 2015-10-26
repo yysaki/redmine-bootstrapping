@@ -31,6 +31,14 @@ sudo /opt/nginx/sbin/nginx
 sudo /opt/nginx/sbin/nginx -s stop
 ```
 
+passenger 動作確認
+==================
+
+```
+sudo passenger-config validate-install
+sudo passenger-memory-stats
+```
+
 redmine 動作確認
 ================
 
