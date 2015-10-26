@@ -35,6 +35,7 @@ expect "Select language:*"
 send "ja\n"
 interact
 '
+sudo chmod 777 db
 sudo chmod 666 db/redmine.db
 
 sudo cp /vagrant/files/nginx.conf /etc/nginx/
