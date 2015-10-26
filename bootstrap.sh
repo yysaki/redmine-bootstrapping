@@ -1,3 +1,4 @@
+#!/bin/sh
 
 cd /home/vagrant/
 sudo apt-get update
