@@ -8,11 +8,16 @@ echo 'mysql-server mysql-server/root_password password root' | sudo debconf-set-
 echo 'mysql-server mysql-server/root_password_again password root' | sudo debconf-set-selections
 sudo apt-get install -y mysql-server libmysqld-dev
 mysqladmin -p'root' password '' -u root
-sudo apt-get install -y build-essential libssl-dev libreadline6-dev zlib1g-dev libcurl4-openssl-dev curl libyaml-dev ruby ruby-dev
+sudo apt-get install -y ruby ruby-dev
 sudo apt-get install -y libmagickwand-dev imagemagick
 sudo apt-get install -y expect
-sudo gem install passenger
-sudo passenger-install-nginx-module --auto
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
+sudo apt-get install -y apt-transport-https ca-certificates
+sudo sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger trusty main > /etc/apt/sources.list.d/passenger.list'
+sudo apt-get update
+sudo apt-get install -y nginx-extras passenger
+sudo apt-get update
+sudo apt-get upgrade -y
 sudo gem install bundler
 
 git clone https://github.com/redmine/redmine.git
@@ -32,4 +37,9 @@ interact
 '
 sudo chmod 666 db/redmine.db
 
-sudo cp /vagrant/files/nginx.conf /opt/nginx/conf/
+sudo cp /vagrant/files/nginx.conf /etc/nginx/
+sudo cp /vagrant/files/redmine /etc/nginx/sites-available/
+sudo rm /etc/nginx/sites-enable/default
+sudo ln -s /etc/nginx/sites-available/redmine /etc/nginx/sites-enable/redmine
+
+sudo service nginx restart
