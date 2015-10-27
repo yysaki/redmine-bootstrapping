@@ -36,6 +36,7 @@ expect "Select language:*"
 send "ja\n"
 interact
 '
+sudo chmod 777 tmp
 sudo chmod 777 db
 sudo chmod 666 db/redmine.db
 
