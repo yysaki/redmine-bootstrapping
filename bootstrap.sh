@@ -25,6 +25,7 @@ git clone https://github.com/redmine/redmine.git
 cd /home/vagrant/redmine/
 git checkout 3.1.1
 cp /vagrant/files/database.yml /home/vagrant/redmine/config/
+cp /home/vagrant/redmine/config/database.yml{,.bak}
 bundle install --path .bundle --without development test
 bundle exec rake generate_secret_token
 sudo RAILS_ENV=production bundle exec rake db:migrate
@@ -40,6 +41,8 @@ sudo chmod 777 tmp
 sudo chmod 777 db
 sudo chmod 666 db/redmine.db
 
+sudo cp /etc/nginx/nginx.conf{,.bak}
+sudo cp /etc/nginx/sites-available/redmine{,.bak}
 sudo cp /vagrant/files/nginx.conf /etc/nginx/
 sudo cp /vagrant/files/redmine /etc/nginx/sites-available/
 sudo rm /etc/nginx/sites-enable/default
