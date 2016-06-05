@@ -3,7 +3,7 @@
 cd /home/vagrant/
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt-get install -y git
+sudo apt-get install -y git openssh-server language-pack-ja
 sudo apt-get install -y sqlite libsqlite3-dev
 echo 'mysql-server mysql-server/root_password password root' | sudo debconf-set-selections
 echo 'mysql-server mysql-server/root_password_again password root' | sudo debconf-set-selections
@@ -14,7 +14,7 @@ sudo apt-get install -y libmagickwand-dev imagemagick
 sudo apt-get install -y expect
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
 sudo apt-get install -y apt-transport-https ca-certificates
-sudo sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger trusty main > /etc/apt/sources.list.d/passenger.list'
+sudo sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main > /etc/apt/sources.list.d/passenger.list'
 sudo apt-get update
 sudo apt-get install -y nginx-extras passenger
 sudo apt-get update
