@@ -1,7 +1,7 @@
 server {
   listen 80
   server_name localhost
-  root /home/vagrant/redmine/public
+  root /home/yysaki/redmine/public
   passenger_enabled on
   client_max_body_size 10M
   #passenger_ruby /usr/bin/ruby2.1

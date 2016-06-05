@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /home/vagrant/
+cd /home/yysaki/
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y git openssh-server language-pack-ja
@@ -22,10 +22,10 @@ sudo apt-get upgrade -y
 sudo gem install bundler
 
 git clone https://github.com/redmine/redmine.git
-cd /home/vagrant/redmine/
-git checkout 3.1.1
-cp /vagrant/files/database.yml /home/vagrant/redmine/config/
-cp /home/vagrant/redmine/config/database.yml{,.bak}
+cd /home/yysaki/redmine/
+git checkout 3.2.3
+mv /home/yysaki/redmine/config/database.yml
+cp /home/yysaki/redmine-bootstrapping/files/database.yml /home/yysaki/redmine/config/
 bundle install --path .bundle --without development test
 bundle exec rake generate_secret_token
 sudo RAILS_ENV=production bundle exec rake db:migrate
@@ -41,11 +41,11 @@ sudo chmod 777 tmp
 sudo chmod 777 db
 sudo chmod 666 db/redmine.db
 
-sudo cp /etc/nginx/nginx.conf{,.bak}
-sudo cp /etc/nginx/sites-available/redmine{,.bak}
-sudo cp /vagrant/files/nginx.conf /etc/nginx/
-sudo cp /vagrant/files/redmine /etc/nginx/sites-available/
-sudo rm /etc/nginx/sites-enable/default
-sudo ln -s /etc/nginx/sites-available/redmine /etc/nginx/sites-enable/redmine
+sudo mv /etc/nginx/nginx.conf{,.bak}
+sudo mv /home/yysaki/redmine-bootstrapping/files/redmine{,.bak}
+sudo cp /home/yysaki/redmine-bootstrapping/files/nginx.conf /etc/nginx/
+sudo cp /home/yysaki/redmine-bootstrapping/files/redmine /etc/nginx/sites-available/
+sudo mv /etc/nginx/sites-enabled/default{,.bak}
+sudo ln -s /etc/nginx/sites-available/redmine /etc/nginx/sites-enabled/redmine
 
 sudo service nginx restart
