@@ -41,11 +41,11 @@ sudo chmod 777 tmp
 sudo chmod 777 db
 sudo chmod 666 db/redmine.db
 
-sudo mv /etc/nginx/nginx.conf{,.bak}
-sudo mv /home/yysaki/redmine-bootstrapping/files/redmine{,.bak}
-sudo cp /home/yysaki/redmine-bootstrapping/files/nginx.conf /etc/nginx/
-sudo cp /home/yysaki/redmine-bootstrapping/files/redmine /etc/nginx/sites-available/
-sudo mv /etc/nginx/sites-enabled/default{,.bak}
-sudo ln -s /etc/nginx/sites-available/redmine /etc/nginx/sites-enabled/redmine
+# sudo mv /etc/nginx/nginx.conf{,.bak}
+# sudo mv /home/yysaki/redmine-bootstrapping/files/redmine{,.bak}
+# sudo cp /home/yysaki/redmine-bootstrapping/files/nginx.conf /etc/nginx/
+# sudo cp /home/yysaki/redmine-bootstrapping/files/redmine /etc/nginx/sites-available/
+# sudo mv /etc/nginx/sites-enabled/default{,.bak}
+# sudo ln -s /etc/nginx/sites-available/redmine /etc/nginx/sites-enabled/redmine
 
-sudo service nginx restart
+# sudo service nginx restart
