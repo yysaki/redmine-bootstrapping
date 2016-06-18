@@ -14,11 +14,7 @@ sudo apt-get install -y libmagickwand-dev imagemagick
 sudo apt-get install -y expect
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
 sudo apt-get install -y apt-transport-https ca-certificates
-sudo sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main > /etc/apt/sources.list.d/passenger.list'
-sudo apt-get update
-sudo apt-get install -y nginx-extras passenger
-sudo apt-get update
-sudo apt-get upgrade -y
+sudo apt-get install -y nginx
 sudo gem install bundler
 
 git clone https://github.com/redmine/redmine.git
@@ -41,11 +37,7 @@ sudo chmod 777 tmp
 sudo chmod 777 db
 sudo chmod 666 db/redmine.db
 
-# sudo mv /etc/nginx/nginx.conf{,.bak}
-# sudo mv /home/yysaki/redmine-bootstrapping/files/redmine{,.bak}
-# sudo cp /home/yysaki/redmine-bootstrapping/files/nginx.conf /etc/nginx/
-# sudo cp /home/yysaki/redmine-bootstrapping/files/redmine /etc/nginx/sites-available/
-# sudo mv /etc/nginx/sites-enabled/default{,.bak}
-# sudo ln -s /etc/nginx/sites-available/redmine /etc/nginx/sites-enabled/redmine
-
-# sudo service nginx restart
+mv /home/yysaki/redmine/Gemfile.local{,.bak}
+cp /home/yysaki/redmine-bootstrapping/files/Gemfile.local /home/yysaki/redmine/
+sudo bundle update
+# sudo bundle exec unicorn_rails -l 8081 -E production
