@@ -11,7 +11,7 @@ brew install virtualbox
 brew install vagrant
 mkdir ~/vagrant
 mkdir ~/vagrant/scratch/
-vagrant init ubuntu/trusty64
+vagrant init ubuntu/xenial64
 vagrant up
 vagrant ssh
 ```
