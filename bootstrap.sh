@@ -40,4 +40,6 @@ sudo chmod 666 db/redmine.db
 mv /home/yysaki/redmine/Gemfile.local{,.bak}
 cp /home/yysaki/redmine-bootstrapping/files/Gemfile.local /home/yysaki/redmine/
 sudo bundle update
+cp /home/yysaki/redmine-bootstrapping/files/unicorn.rb /home/yysaki/redmine/config/
+
 # sudo bundle exec unicorn_rails -l 8081 -E production
