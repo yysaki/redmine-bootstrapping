@@ -1,8 +1,16 @@
+upstream unicorn-redmine {
+    server unix:/home/yysaki/redmine/tmp/unicorn_redmine.sock;
+}
+
 server {
-  listen 80
-  server_name localhost
-  root /home/yysaki/redmine/public
-  passenger_enabled on
-  client_max_body_size 10M
-  #passenger_ruby /usr/bin/ruby2.1
+    listen 80;
+    server_name localhost;
+
+    root /home/yysaki/redmine/public;
+
+    location / {
+        proxy_pass http://unicorn-redmine;
+    }
+
+    error_page 500 502 503 504 /500.html;
 }
