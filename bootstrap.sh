@@ -49,3 +49,6 @@ sudo systemctl enable redmine-unicorn.service
 sudo cp /home/yysaki/redmine-bootstrapping/files/redmine /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/redmine /etc/nginx/sites-enabled/
 sudo rm /etc/nginx/sites-enabled/default
+
+sudo systemctl start nginx.service
+sudo systemctl enable nginx.service
