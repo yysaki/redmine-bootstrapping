@@ -57,3 +57,9 @@ sudo apt-get install -y mailutils
 sudo mv /etc/postfix/main.cf{,.bak}
 sudo cp /home/yysaki/redmine-bootstrapping/files/main.cf /etc/postfix/
 sudo systemctl restart postfix
+
+# sudo cp /home/yysaki/redmine-bootstrapping/files/main-relay.cf /etc/postfix/main.cf
+# sudo cp /home/yysaki/redmine-bootstrapping/files/relay_password /etc/postfix/
+# sudo vi /etc/postfix/relay_password
+# sudo postmap hash:/etc/postfix/relay_password
+# sudo systemctl restart postfix
