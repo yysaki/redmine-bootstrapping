@@ -52,3 +52,8 @@ sudo rm /etc/nginx/sites-enabled/default
 
 sudo systemctl start nginx.service
 sudo systemctl enable nginx.service
+
+sudo apt-get install -y mailutils
+sudo mv /etc/postfix/main.cf{,.bak}
+sudo cp /home/yysaki/redmine-bootstrapping/files/main.cf /etc/postfix/
+sudo systemctl restart postfix
