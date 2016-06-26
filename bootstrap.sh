@@ -76,3 +76,20 @@ expect "Enter same passphrase again:"
 send "\n"
 interact
 '
+
+# gitolite
+sudo useradd -m -U -r -s /bin/bash -d /srv/git git
+sudo cp /home/yysaki/.ssh/id_rsa.pub /srv/git/admin.pub
+sudo chown git:git /srv/git/admin.pub
+sudo su - git
+cd /srv/git/
+git clone http://github.com/sitaramc/gitolite.git
+mkdir bin
+echo "export PATH=/srv/git/bin:$PATH" >> /srv/git/.bashrc
+source /srv/git/.bashrc
+gitolite/install -ln
+gitolite setup -pk admin.pub
+rm admin.pub
+exit
+# git clone git@{hostname}:gitolite-admin.git
+# ssh git@{hostname} help
