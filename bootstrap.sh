@@ -63,3 +63,16 @@ sudo systemctl restart postfix
 # sudo vi /etc/postfix/relay_password
 # sudo postmap hash:/etc/postfix/relay_password
 # sudo systemctl restart postfix
+
+# ssh-keygen
+expect -c '
+set timeout 10
+spawn ssh-keygen -t rsa
+expect -re "Enter file in which to save the key\ (.\*\):"
+send "\n"
+expect "Enter passphrase \(empty for no passphrase\):"
+send "\n"
+expect "Enter same passphrase again:"
+send "\n"
+interact
+'
