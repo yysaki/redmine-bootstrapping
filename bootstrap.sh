@@ -21,6 +21,16 @@ sudo apt-get install -y nginx
 sudo gem install bundler
 
 # redmine #{{{1
+
+sudo useradd -m -U -r -s /bin/bash -d /home/unicorn unicorn
+
+sudo cp $SCRIPT_DIR/files/database.yml /home/unicorn/
+sudo cp $SCRIPT_DIR/files/Gemfile.local /home/unicorn/
+sudo cp $SCRIPT_DIR/files/unicorn.rb /home/unicorn/
+sudo chown unicorn:unicorn /home/unicorn/database.yml
+sudo chown unicorn:unicorn /home/unicorn/Gemfile.local
+sudo chown unicorn:unicorn /home/unicorn/unicorn.rb
+
 git clone https://github.com/redmine/redmine.git
 cd /home/yysaki/redmine/
 git checkout 3.2.3
@@ -45,6 +55,11 @@ mv /home/yysaki/redmine/Gemfile.local /home/yysaki/redmine/Gemfile.local.bak
 cp $SCRIPT_DIR/files/Gemfile.local /home/yysaki/redmine/
 sudo bundle update
 cp $SCRIPT_DIR/files/unicorn.rb /home/yysaki/redmine/config/
+
+sudo rm /home/unicorn/database.yml
+sudo rm /home/unicorn/Gemfile.local
+sudo rm /home/unicorn/unicorn.rb
+
 sudo cp $SCRIPT_DIR/files/redmine-unicorn.service /lib/systemd/system/
 
 sudo systemctl start redmine-unicorn.service
