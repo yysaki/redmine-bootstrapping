@@ -39,7 +39,7 @@ sudo chmod 777 tmp
 sudo chmod 777 db
 sudo chmod 666 db/redmine.db
 
-mv /home/yysaki/redmine/Gemfile.local{,.bak}
+mv /home/yysaki/redmine/Gemfile.local /home/yysaki/redmine/Gemfile.local.bak
 cp $SCRIPT_DIR/files/Gemfile.local /home/yysaki/redmine/
 sudo bundle update
 cp $SCRIPT_DIR/files/unicorn.rb /home/yysaki/redmine/config/
@@ -56,7 +56,7 @@ sudo systemctl start nginx.service
 sudo systemctl enable nginx.service
 
 sudo apt-get install -y mailutils
-sudo mv /etc/postfix/main.cf{,.bak}
+sudo mv /etc/postfix/main.cf /etc/postfix/main.cf.bak
 sudo cp $SCRIPT_DIR/files/main.cf /etc/postfix/
 sudo systemctl restart postfix
 
@@ -81,7 +81,7 @@ interact
 
 # gitolite
 sudo useradd -m -U -r -s /bin/bash -d /srv/git git
-sudo cp /home/yysaki/.ssh/id_rsa.pub /srv/git/admin.pub
+sudo cp ~/.ssh/id_rsa.pub /srv/git/admin.pub
 sudo chown git:git /srv/git/admin.pub
 sudo su - git
 cd /srv/git/
