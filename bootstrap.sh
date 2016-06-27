@@ -2,6 +2,8 @@
 
 SCRIPT_DIR=$(cd $(dirname $0);pwd)
 
+#general #{{{1
+
 cd /home/yysaki/
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -19,6 +21,7 @@ sudo apt-get install -y apt-transport-https ca-certificates
 sudo apt-get install -y nginx
 sudo gem install bundler
 
+# redmine #{{{1
 git clone https://github.com/redmine/redmine.git
 cd /home/yysaki/redmine/
 git checkout 3.2.3
@@ -52,9 +55,11 @@ sudo cp $SCRIPT_DIR/files/redmine /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/redmine /etc/nginx/sites-enabled/
 sudo rm /etc/nginx/sites-enabled/default
 
+# nginx #{{{1
 sudo systemctl start nginx.service
 sudo systemctl enable nginx.service
 
+# postfix #{{{1
 sudo apt-get install -y mailutils
 sudo mv /etc/postfix/main.cf /etc/postfix/main.cf.bak
 sudo cp $SCRIPT_DIR/files/main.cf /etc/postfix/
@@ -66,7 +71,7 @@ sudo systemctl restart postfix
 # sudo postmap hash:/etc/postfix/relay_password
 # sudo systemctl restart postfix
 
-# ssh-keygen
+# ssh-keygen #{{{1
 expect -c '
 set timeout 10
 spawn ssh-keygen -t rsa
@@ -79,7 +84,7 @@ send "\n"
 interact
 '
 
-# gitolite
+# gitolite #{{{1
 sudo useradd -m -U -r -s /bin/bash -d /srv/git git
 sudo cp ~/.ssh/id_rsa.pub /srv/git/admin.pub
 sudo chown git:git /srv/git/admin.pub
@@ -95,3 +100,6 @@ rm admin.pub
 exit
 # git clone git@{hostname}:gitolite-admin.git
 # ssh git@{hostname} help
+
+# __END__  #{{{1
+# vim: foldmethod=marker
