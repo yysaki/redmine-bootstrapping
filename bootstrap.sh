@@ -1,5 +1,7 @@
 #!/bin/sh
 
+SCRIPT_DIR=$(cd $(dirname $0);pwd)
+
 cd /home/yysaki/
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -21,7 +23,7 @@ git clone https://github.com/redmine/redmine.git
 cd /home/yysaki/redmine/
 git checkout 3.2.3
 mv /home/yysaki/redmine/config/database.yml
-cp /home/yysaki/redmine-bootstrapping/files/database.yml /home/yysaki/redmine/config/
+cp $SCRIPT_DIR/files/database.yml /home/yysaki/redmine/config/
 bundle install --path .bundle --without development test
 bundle exec rake generate_secret_token
 sudo RAILS_ENV=production bundle exec rake db:migrate
@@ -38,15 +40,15 @@ sudo chmod 777 db
 sudo chmod 666 db/redmine.db
 
 mv /home/yysaki/redmine/Gemfile.local{,.bak}
-cp /home/yysaki/redmine-bootstrapping/files/Gemfile.local /home/yysaki/redmine/
+cp $SCRIPT_DIR/files/Gemfile.local /home/yysaki/redmine/
 sudo bundle update
-cp /home/yysaki/redmine-bootstrapping/files/unicorn.rb /home/yysaki/redmine/config/
-sudo cp /home/yysaki/redmine-bootstrapping/files/redmine-unicorn.service /lib/systemd/system/
+cp $SCRIPT_DIR/files/unicorn.rb /home/yysaki/redmine/config/
+sudo cp $SCRIPT_DIR/files/redmine-unicorn.service /lib/systemd/system/
 
 sudo systemctl start redmine-unicorn.service
 sudo systemctl enable redmine-unicorn.service
 
-sudo cp /home/yysaki/redmine-bootstrapping/files/redmine /etc/nginx/sites-available/
+sudo cp $SCRIPT_DIR/files/redmine /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/redmine /etc/nginx/sites-enabled/
 sudo rm /etc/nginx/sites-enabled/default
 
@@ -55,11 +57,11 @@ sudo systemctl enable nginx.service
 
 sudo apt-get install -y mailutils
 sudo mv /etc/postfix/main.cf{,.bak}
-sudo cp /home/yysaki/redmine-bootstrapping/files/main.cf /etc/postfix/
+sudo cp $SCRIPT_DIR/files/main.cf /etc/postfix/
 sudo systemctl restart postfix
 
-# sudo cp /home/yysaki/redmine-bootstrapping/files/main-relay.cf /etc/postfix/main.cf
-# sudo cp /home/yysaki/redmine-bootstrapping/files/relay_password /etc/postfix/
+# sudo cp $SCRIPT_DIR/files/main-relay.cf /etc/postfix/main.cf
+# sudo cp $SCRIPT_DIR/files/relay_password /etc/postfix/
 # sudo vi /etc/postfix/relay_password
 # sudo postmap hash:/etc/postfix/relay_password
 # sudo systemctl restart postfix
