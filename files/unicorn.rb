@@ -1,6 +1,6 @@
 worker_processes 1
 
-listen "/home/yysaki/redmine/tmp/unicorn_redmine.sock", :backlog => 32
+listen "/home/unicorn/redmine/tmp/unicorn_redmine.sock", :backlog => 32
 pid "tmp/pids/unicorn.pid"
 
 stderr_path 'log/unicorni_error.log'
@@ -21,8 +21,8 @@ after_fork do |server, worker|
 
   begin
     uid, gid = Process.euid, Process.egid
-    user, group = "yysaki", "yysaki"
-    ENV["HOME"] = "/home/yysaki/redmine"
+    user, group = "unicorn", "unicorn"
+    ENV["HOME"] = "/home/unicorn/redmine"
     target_uid = Etc.getpwnam(user).uid
     target_gid = Etc.getgrnam(group).gid
     worker.tmp.chown(target_uid, target_gid)
