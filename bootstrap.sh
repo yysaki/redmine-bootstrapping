@@ -31,13 +31,9 @@ sudo chown unicorn:unicorn /home/unicorn/database.yml
 sudo chown unicorn:unicorn /home/unicorn/Gemfile.local
 sudo chown unicorn:unicorn /home/unicorn/unicorn.rb
 
-git clone https://github.com/redmine/redmine.git
-cd /home/yysaki/redmine/
-git checkout 3.2.3
-mv /home/yysaki/redmine/config/database.yml
-cp $SCRIPT_DIR/files/database.yml /home/yysaki/redmine/config/
-bundle install --path .bundle --without development test
-bundle exec rake generate_secret_token
+sudo -u unicorn sh -c $SCRIPT_DIR/unicorn-tasks.sh
+
+cd /home/unicorn/redmine/
 sudo RAILS_ENV=production bundle exec rake db:migrate
 expect -c '
 spawn sudo RAILS_ENV=production bundle exec rake redmine:load_default_data
@@ -47,14 +43,10 @@ expect "Select language:*"
 send "ja\n"
 interact
 '
+
 sudo chmod 777 tmp
 sudo chmod 777 db
 sudo chmod 666 db/redmine.db
-
-mv /home/yysaki/redmine/Gemfile.local /home/yysaki/redmine/Gemfile.local.bak
-cp $SCRIPT_DIR/files/Gemfile.local /home/yysaki/redmine/
-sudo bundle update
-cp $SCRIPT_DIR/files/unicorn.rb /home/yysaki/redmine/config/
 
 sudo rm /home/unicorn/database.yml
 sudo rm /home/unicorn/Gemfile.local
@@ -68,6 +60,8 @@ sudo systemctl enable redmine-unicorn.service
 sudo cp $SCRIPT_DIR/files/redmine /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/redmine /etc/nginx/sites-enabled/
 sudo rm /etc/nginx/sites-enabled/default
+
+cd $SCRIPT_DIR
 
 # nginx #{{{1
 sudo systemctl start nginx.service
