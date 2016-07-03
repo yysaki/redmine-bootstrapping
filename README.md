@@ -43,3 +43,9 @@ sh /vagrant/bootstrap.sh
 vagrant ssh
 git clone git@localhost:testing.git
 ```
+
+TODO
+----
+
+* OP25B絡みか本設定ではメール送信が行えない。
+    * bootstrap.sh のコメントにこれを回避するためリレー先をgmailにするworkaroundを記載している。

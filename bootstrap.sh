@@ -73,6 +73,7 @@ sudo mv /etc/postfix/main.cf /etc/postfix/main.cf.bak
 sudo cp $SCRIPT_DIR/files/main.cf /etc/postfix/
 sudo systemctl restart postfix
 
+# リレー先をgmailにするworkaround
 # sudo cp $SCRIPT_DIR/files/main-relay.cf /etc/postfix/main.cf
 # sudo cp $SCRIPT_DIR/files/relay_password /etc/postfix/
 # sudo vi /etc/postfix/relay_password
