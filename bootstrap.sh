@@ -64,7 +64,7 @@ sudo rm /etc/nginx/sites-enabled/default
 cd $SCRIPT_DIR
 
 # nginx #{{{1
-sudo systemctl start nginx.service
+sudo systemctl restart nginx.service
 sudo systemctl enable nginx.service
 
 # postfix #{{{1
