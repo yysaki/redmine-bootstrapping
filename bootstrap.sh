@@ -100,8 +100,6 @@ sudo chown git:git /srv/git/admin.pub
 sudo -u git sh -c $SCRIPT_DIR/git-tasks.sh
 
 sudo rm /srv/git/admin.pub
-# git clone git@{hostname}:gitolite-admin.git
-# ssh git@{hostname} help
 
 # __END__  #{{{1
 # vim: foldmethod=marker
