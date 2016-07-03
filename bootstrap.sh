@@ -54,7 +54,7 @@ sudo rm /home/unicorn/unicorn.rb
 
 sudo cp $SCRIPT_DIR/files/redmine-unicorn.service /lib/systemd/system/
 
-sudo systemctl start redmine-unicorn.service
+sudo systemctl restart redmine-unicorn.service
 sudo systemctl enable redmine-unicorn.service
 
 sudo cp $SCRIPT_DIR/files/redmine /etc/nginx/sites-available/
