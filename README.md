@@ -14,8 +14,8 @@ Vagrantにてredmine、gitoliteのサーバーを立てるためのスクリプ�
 ### vagrant sshまで
 
 ``` sh
-brew install virtualbox
-brew install vagrant
+brew cask install virtualbox
+brew cask install vagrant
 git clone https://github.com/yysaki/redmine-bootstrapping.git
 cd redmine-bootstrapping
 vagrant up
