@@ -3,7 +3,7 @@
 SCRIPT_DIR=$(cd $(dirname $0);pwd)
 
 #general #{{{1
-
+echo "set grub-pc/install_devices /dev/sda" | sudo debconf-communicate
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y git openssh-server language-pack-ja
