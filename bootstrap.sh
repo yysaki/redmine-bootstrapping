@@ -14,7 +14,6 @@ sudo apt-get install -y mysql-server libmysqld-dev
 mysqladmin -p'root' password '' -u root
 sudo apt-get install -y ruby ruby-dev
 sudo apt-get install -y libmagickwand-dev imagemagick
-sudo apt-get install -y expect
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
 sudo apt-get install -y apt-transport-https ca-certificates
 sudo apt-get install -y nginx
@@ -35,14 +34,7 @@ sudo -u unicorn sh -c $SCRIPT_DIR/unicorn-tasks.sh
 
 cd /home/unicorn/redmine/
 sudo RAILS_ENV=production bundle exec rake db:migrate
-expect -c '
-spawn sudo RAILS_ENV=production bundle exec rake redmine:load_default_data
-
-set timeout 30
-expect "Select language:*"
-send "ja\n"
-interact
-'
+sudo RAILS_ENV=production REDMINE_LANG=ja bundle exec rake redmine:load_default_data
 
 sudo chmod 777 tmp
 sudo chmod 777 db
