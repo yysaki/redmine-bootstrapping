@@ -3,17 +3,7 @@
 HOME=/srv/git
 cd $HOME
 
-expect -c '
-set timeout 10
-spawn ssh-keygen -t rsa
-expect -re "Enter file in which to save the key\ (.\*\):"
-send "\n"
-expect "Enter passphrase \(empty for no passphrase\):"
-send "\n"
-expect "Enter same passphrase again:"
-send "\n"
-interact
-'
+ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/id_rsa  -N ""
 touch .ssh/authorized_keys
 
 git clone http://github.com/sitaramc/gitolite.git
