@@ -1,0 +1,16 @@
+upstream unicorn-redmine {
+    server unix:/home/unicorn/redmine/tmp/unicorn_redmine.sock;
+}
+
+server {
+    listen 80;
+    server_name localhost;
+
+    root /home/unicorn/redmine/public;
+
+    location / {
+        proxy_pass http://unicorn-redmine;
+    }
+
+    error_page 500 502 503 504 /500.html;
+}
