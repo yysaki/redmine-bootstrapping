@@ -5,8 +5,7 @@ Vagrantにてredmine、gitoliteのサーバーを立てるためのスクリプ�
 
 * 母艦の想定: HomeBrewインストール済みのmac
 * ゲストOS: Ubuntu 16.04 LTS
-
-後々Ansibleなどにまとめたい。
+* [itamae](https://github.com/itamae-kitchen/itamae/) を利用
 
 実行手順
 --------
@@ -25,8 +24,9 @@ vagrant ssh
 ### ゲストサーバーのセットアップ
 
 ``` sh
-vagrant ssh
-sh /vagrant/bootstrap.sh
+gem install bundler
+bundle install --path vendor/bundler
+bundle exec itamae ssh --vagrant sabaku.rb
 ```
 
 動作確認
@@ -47,4 +47,3 @@ TODO
 ----
 
 * OP25B絡みか本設定ではメール送信が行えない。
-    * bootstrap.sh のコメントにこれを回避するためリレー先をgmailにするworkaroundを記載している。
